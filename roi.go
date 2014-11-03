@@ -87,7 +87,7 @@ func NewRoi(i interface{}) *Roi {
 		h, err := strconv.Atoi(parts[2])
 
 		if err != nil {
-			log.Println("Illegal parameters. width and height should be integers, `%s` given. Error: %v\n", v, err)
+			log.Printf("Illegal parameters. width and height should be integers, `%s` given. Error: %v\n", v, err)
 			return nil
 		}
 

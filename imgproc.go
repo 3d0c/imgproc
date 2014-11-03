@@ -14,12 +14,25 @@ import (
 type Options struct {
 	Base    *Source
 	Scale   *Scale
+	Crop    *Roi
 	Format  string
 	Method  int
 	Quality int
 }
 
 func Proc(o *Options) []byte {
+	if o.Crop != nil && o.Scale != nil {
+		// if both options selected, crop will be first, the scale size will be calculated from cropped dimension
+		roi := o.Crop.Calc(o.Base.Size())
+		zoom := o.Scale.Size(&Dimension{roi.Width, roi.Height})
+
+		return resize(o, zoom, roi)
+	}
+
+	if o.Crop != nil {
+		return resize(o, nil, o.Crop.Calc(o.Base.Size()))
+	}
+
 	if o.Scale != nil {
 		return resize(o, o.Scale.Size(o.Base.Size()), nil)
 	}
