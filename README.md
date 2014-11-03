@@ -53,7 +53,7 @@ E.g.:
 `NewRoi` supported options:
 
 - `X,Y,width,height`
-- `width,height,center|left|right|bleft|bright`
+- `center|left|right|bleft|bright,width,height`
 
 #### Crop and Resize
 
